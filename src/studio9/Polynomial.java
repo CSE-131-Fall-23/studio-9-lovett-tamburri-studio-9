@@ -3,49 +3,81 @@ package studio9;
 import java.util.LinkedList;
 
 public class Polynomial {
-	
+
 	private LinkedList<Double> list;
 
 	/**
 	 * Constructs a Polynomial with no terms yet.
 	 */
 	public Polynomial() {
-		//FIXME
+
+		LinkedList <Double> list = new LinkedList<>();
+		this.list = list;
 	}
 
-	
+
 	/**
 	 * 
 	 * @param coeff
 	 * @return polynomial with added term
 	 */
 	public void addTerm(double coeff) {
-		//FIXME
+
+		list.add(coeff);
 	}
-	
+
 	/*
 	 * Returns a String of the polynomial with the proper form:
 	 * 
 	 * Cx^N + Cx^N-1 + ... + Cx + C
 	 */
-	public String toString() {
-		return ""; //FIXME
+	public String toString(double coeff) {
+
+		String LIST = "";
+		int power = list.size();
+		for (int i = 0; i < list.size(); i ++)
+		{
+			LIST += (coeff + "x^" + power);
+			power -= 1;
+		}
+
+		return LIST;
 	}
-	
+
 	/**
 	 * 
 	 * @param x
 	 * @return value of polynomial at that x
 	 */
 	public double evaluate(double x) {
-		return 0;//FIXME
+
+		double sum = 0; 
+		int power = list.size() - 1;
+		for (int i = 0; i < list.size(); i ++)
+		{
+			sum += (list.get(i) * Math.pow(x, power));
+			power -= 1;
+		}
+
+		return sum;//FIXME
 	}
 
-	
+
 	public Polynomial derivative() {
-		return null;//FIXME
+
+		Polynomial d = new Polynomial();
+		int power = list.size() - 1;
+
+		for (int i = 0; i < list.size() - 1; i++) {
+
+			d.addTerm(list.get(i) * power);
+			power -=1;
+
+		}
+
+		return d;//FIXME
 	}
-	
+
 
 	/**
 	 * This is the "equals" method that is called by
